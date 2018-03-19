@@ -18,10 +18,29 @@ var config = {
         'YTD'
     ],
     yards: [
+        'Baldwin',
+        'Clearwater',
+        'Daytona',
+        'Gainesville',
+        'Jacksonville',
         'Kaley',
-        'Orlando',
-        'St. Pete',
-        'Tampa'
+        'Landstreet',
+        'Miami',
+        'Ocala',
+        'Okeechobee',
+        'Opa Locka',
+        'Pinellas Park',
+        'Pompano',
+        'Punta Gorda',
+        'Riviera Beach',
+        'Rockledge',
+        'Sanford',
+        'Sarasota',
+        'Seffner',
+        'Sortation',
+        'Sutton',
+        'Tampa Port',
+        'Ybor'
     ],
     colors: [
         { description: 'Light Blue', textColor: '#000000', backgroundColor: '#b9d3ed', pdfColor: [185, 211, 237], pdfTextColor: [0, 0, 0] },
