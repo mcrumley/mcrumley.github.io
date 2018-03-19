@@ -43,8 +43,12 @@ var config = {
         'Ybor'
     ],
     colors: [
+        { description: 'Blue', textColor: '#ffffff', backgroundColor: '#6097d4', pdfColor: [96, 151, 212], pdfTextColor: [255, 255, 255] },
+        { description: 'Yellow', textColor: '#ffffff', backgroundColor: '#e2e25d', pdfColor: [226, 226, 93], pdfTextColor: [0, 0, 0] },
+        { description: 'Red', textColor: '#ffffff', backgroundColor: '#e27c7c', pdfColor: [226, 124, 124], pdfTextColor: [255, 255, 255] },
         { description: 'Light Blue', textColor: '#000000', backgroundColor: '#b9d3ed', pdfColor: [185, 211, 237], pdfTextColor: [0, 0, 0] },
-        { description: 'Blue', textColor: '#ffffff', backgroundColor: '#6097d4', pdfColor: [96, 151, 212], pdfTextColor: [255, 255, 255] }
+        { description: 'Light Yellow', textColor: '#000000', backgroundColor: '#eaeabb', pdfColor: [234, 234, 187], pdfTextColor: [0, 0, 0] },
+        { description: 'Light Red', textColor: '#000000', backgroundColor: '#f0bcbc', pdfColor: [240, 188, 188], pdfTextColor: [0, 0, 0] }
     ]
 };
 
@@ -58,7 +62,7 @@ try {
 catch (e) {
 }
 var bbox_files = JSON.parse(stored);
-var blank = { year: year, yard: '', status1: 1, status2: 0, categories: [ { title: '', color: 0, goals: [emptyGoal, emptyGoal, emptyGoal] }, { title: '', color: 1, goals: [emptyGoal, emptyGoal, emptyGoal] }, { title: '', color: 1, goals: [emptyGoal, emptyGoal, emptyGoal] }, { title: '', color: 1, goals: [emptyGoal, emptyGoal, emptyGoal] }, { title: '', color: 1, goals: [emptyGoal, emptyGoal, emptyGoal] } ] };
+var blank = { year: year, yard: '', status1: 1, status2: 0, categories: [ { title: '', color: 3, goals: [emptyGoal, emptyGoal, emptyGoal] }, { title: '', color: 0, goals: [emptyGoal, emptyGoal, emptyGoal] }, { title: '', color: 0, goals: [emptyGoal, emptyGoal, emptyGoal] }, { title: '', color: 0, goals: [emptyGoal, emptyGoal, emptyGoal] }, { title: '', color: 0, goals: [emptyGoal, emptyGoal, emptyGoal] } ] };
 
 btnNewBBox.addEventListener('click', function(e) {
     e.preventDefault();
@@ -237,6 +241,7 @@ function editBBoxPage(report) {
         color.setAttribute('data-value', report.categories[i].color);
         color.style.backgroundColor = config.colors[report.categories[i].color].backgroundColor;
         color.querySelector('span').innerText = config.colors[report.categories[i].color].description;
+        addColorPicker(color);
         for (var j = 0; j < config.goalCount; j++) {
             var goal = document.getElementById('category-' + i + '-goal-' + j);
             goal.value = report.categories[i].goals[j].title;
@@ -596,6 +601,37 @@ function showPreview() {
             show: true
         });
     }
+}
+
+function addColorPicker(btn) {
+    var dialog = document.createElement('div');
+    for (var i = 0; i < config.colors.length; i++) {
+        if (i == 3) {
+            dialog.appendChild(document.createElement('br'));
+        }
+        var swatch = document.createElement('div');
+        swatch.className = 'swatch';
+        swatch.setAttribute('data-value', i);
+        swatch.style.backgroundColor = config.colors[i].backgroundColor;
+        swatch.style.color = config.colors[i].textColor;
+        swatch.title = config.colors[i].description;
+        swatch.addEventListener('click', function(e) {
+            var color = parseInt(this.getAttribute('data-value'), 10);
+            dialog.setAttribute('data-value', color);
+            btn.setAttribute('data-value', color);
+            btn.style.backgroundColor = config.colors[color].backgroundColor;
+            btn.querySelector('span').innerText = config.colors[color].description;
+            $(btn).popover('hide');
+        });
+        dialog.appendChild(swatch);
+        dialog.appendChild(document.createTextNode(' '));
+    }
+    $(btn).popover({
+        content: dialog,
+        html: true,
+        placement: 'bottom',
+        title: 'Choose a color'
+    });
 }
 
 function exportPDF() {
