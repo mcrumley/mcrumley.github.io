@@ -1,0 +1,120 @@
+.page {
+    display: none;
+}
+.page.active {
+    display: block;
+}
+
+.bbox-preview {
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 77.27%;
+    margin-bottom: 1em;
+    border: 1px solid gray;
+    color: gray;
+    position: relative;
+}
+.bbox-preview-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.bbox-preview-title {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+}
+.bbox-preview-blank .bbox-preview-content {
+    font-size: xx-large;
+    font-weight: bold;
+    text-align: center;
+    line-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bbox-preview .bbox-cat {
+    position: absolute;
+    border: 1px solid #eee;
+    padding: 0.25em;
+    overflow: hidden;
+    font-size: small;
+}
+.bbox-preview .bbox-cat.center {
+    top: 30%;
+    bottom: 20%;
+    left: 35%;
+    right: 35%;
+    border-radius: 10px;
+}
+.bbox-preview .bbox-cat.top {
+    top: 15%;
+    bottom: 45%;
+}
+.bbox-preview .bbox-cat.bottom {
+    top: 55%;
+    bottom: 5%;
+}
+.bbox-preview .bbox-cat.left {
+    left: 5%;
+    right: 50%;
+}
+.bbox-preview .bbox-cat.right {
+    left: 50%;
+    right: 5%;
+}
+.bbox-preview .bbox-cat.top.left {
+    border-top-left-radius: 10px;
+}
+.bbox-preview .bbox-cat.top.right {
+    border-top-right-radius: 10px;
+}
+.bbox-preview .bbox-cat.bottom.left {
+    border-bottom-left-radius: 10px;
+}
+.bbox-preview .bbox-cat.bottom.right {
+    border-bottom-right-radius: 10px;
+}
+
+.bbox-preview .bbox-cat .bbox-cat-content {
+    width: 60%;
+    position: absolute;
+    color: #fff;
+}
+.bbox-preview .bbox-cat.right .bbox-cat-content {
+    left: 40%;
+}
+.bbox-preview .bbox-cat.center .bbox-cat-content {
+    width: 100%;
+}
+
+.bbox-title-edit {
+    margin-top: 1em;
+    text-align: center;
+}
+.bbox-yard-edit {
+    text-align: center;
+    font-size: large;
+}
+
+.bbox-category-edit {
+    border: 2px solid gray;
+    min-height: 10em;
+    border-radius: 15px;
+    padding: 1em;
+}
+
+button .invisible {
+    white-space: nowrap;
+}
+
+@supports (backdrop-filter: blur(5px)) {
+    .modal-backdrop.show {
+        backdrop-filter: blur(5px);
+        opacity: 0.1;
+    }
+}

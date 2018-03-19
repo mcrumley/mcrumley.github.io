@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>TMR Blue Box Generator</title>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+            <a class="navbar-brand" href="#">TMR</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <button type="button" class="nav-link btn btn-link" id="btn-new-bbox">New</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="nav-link btn btn-link" disabled id="btn-save-bbox">Save</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="nav-link btn btn-link" disabled id="btn-preview-bbox">Preview</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="nav-link btn btn-link" disabled id="btn-export-bbox">Export</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+
+            <div class="page" id="pg-new-bbox">
+                <div class="row">
+                    <div class="col col-12">
+                        <p>
+                            Choose a previous report to copy, or start from a blank template.
+                        </p>
+                    </div>
+                </div>
+                <div class="row bbox-preview-list"></div>
+            </div>
+
+            <div class="page" id="pg-edit-bbox">
+                <div class="row">
+                    <h2 class="col col-12 bbox-title-edit">
+                        <select id="bbox_year"></select> Strategic Goals
+                    </h2>
+                </div>
+                <div class="row">
+                    <h3 class="col col-12 bbox-yard-edit">
+                        Yard: <select id="bbox_yard"></select>
+                    </h3>
+                </div>
+
+                <div class="row">
+                    <div class="col col-12 col-lg-6">
+                        <fieldset class="bbox-category-edit form-group">
+                            <div class="form-row">
+                                <div class="form-group col-sm-10">
+                                    <label for="category-0-title">Category Title</label>
+                                    <input type="text" class="form-control form-control-lg" id="category-0-title">
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="category-0-color">Color</label>
+                                    <button type="button" class="form-control form-control-lg" id="category-0-color" data-value="0"><span class="invisible"></span></button>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-0-goal-0">Goal #1</label>
+                                    <textarea class="form-control form-control-lg" id="category-0-goal-0"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-0-goal-0-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-0-goal-0-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-0-goal-1">Goal #2</label>
+                                    <textarea class="form-control form-control-lg" id="category-0-goal-1"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-0-goal-1-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-0-goal-1-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-0-goal-2">Goal #3</label>
+                                    <textarea class="form-control form-control-lg" id="category-0-goal-2"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-0-goal-2-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-0-goal-2-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col col-12 col-lg-6">
+                        <fieldset class="bbox-category-edit form-group">
+                            <div class="form-row">
+                                <div class="form-group col-sm-10">
+                                    <label for="category-1-title">Category Title</label>
+                                    <input type="text" class="form-control form-control-lg" id="category-1-title">
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="category-1-color">Color</label>
+                                    <button type="button" class="form-control form-control-lg" id="category-1-color" data-value="0"><span class="invisible"></span></button>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-1-goal-0">Goal #1</label>
+                                    <textarea class="form-control form-control-lg" id="category-1-goal-0"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-1-goal-0-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-1-goal-0-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-1-goal-1">Goal #2</label>
+                                    <textarea class="form-control form-control-lg" id="category-1-goal-1"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-1-goal-1-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-1-goal-1-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-1-goal-2">Goal #3</label>
+                                    <textarea class="form-control form-control-lg" id="category-1-goal-2"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-1-goal-2-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-1-goal-2-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col col-12 col-lg-6">
+                        <fieldset class="bbox-category-edit form-group">
+                            <div class="form-row">
+                                <div class="form-group col-sm-10">
+                                    <label for="category-2-title">Category Title</label>
+                                    <input type="text" class="form-control form-control-lg" id="category-2-title">
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="category-2-color">Color</label>
+                                    <button type="button" class="form-control form-control-lg" id="category-2-color" data-value="0"><span class="invisible"></span></button>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-2-goal-0">Goal #1</label>
+                                    <textarea class="form-control form-control-lg" id="category-2-goal-0"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-2-goal-0-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-2-goal-0-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-2-goal-1">Goal #2</label>
+                                    <textarea class="form-control form-control-lg" id="category-2-goal-1"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-2-goal-1-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-2-goal-1-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-2-goal-2">Goal #3</label>
+                                    <textarea class="form-control form-control-lg" id="category-2-goal-2"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-2-goal-2-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-2-goal-2-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col col-12 col-lg-6">
+                        <fieldset class="bbox-category-edit form-group">
+                            <div class="form-row">
+                                <div class="form-group col-sm-10">
+                                    <label for="category-3-title">Category Title</label>
+                                    <input type="text" class="form-control form-control-lg" id="category-3-title">
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="category-3-color">Color</label>
+                                    <button type="button" class="form-control form-control-lg" id="category-3-color" data-value="0"><span class="invisible"></span></button>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-3-goal-0">Goal #1</label>
+                                    <textarea class="form-control form-control-lg" id="category-3-goal-0"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-3-goal-0-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-3-goal-0-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-3-goal-1">Goal #2</label>
+                                    <textarea class="form-control form-control-lg" id="category-3-goal-1"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-3" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-3-goal-1-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-3-goal-1-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-3-goal-2">Goal #3</label>
+                                    <textarea class="form-control form-control-lg" id="category-3-goal-2"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-3-goal-2-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-3-goal-2-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col col-12 col-lg-6">
+                        <fieldset class="bbox-category-edit form-group">
+                            <div class="form-row">
+                                <div class="form-group col-sm-10">
+                                    <label for="category-4-title">Category Title</label>
+                                    <input type="text" class="form-control form-control-lg" id="category-4-title">
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="category-4-color">Color</label>
+                                    <button type="button" class="form-control form-control-lg" id="category-4-color" data-value="0"><span class="invisible"></span></button>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-4-goal-0">Goal #1</label>
+                                    <textarea class="form-control form-control-lg" id="category-4-goal-0"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-4-goal-0-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-4-goal-0-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-4-goal-1">Goal #2</label>
+                                    <textarea class="form-control form-control-lg" id="category-4-goal-1"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-4-goal-1-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-4-goal-1-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="category-4-goal-2">Goal #3</label>
+                                    <textarea class="form-control form-control-lg" id="category-4-goal-2"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-1">
+                                            <option></option>
+                                            <option>Qtr 1</option>
+                                            <option>Qtr 2</option>
+                                            <option>Qtr 3</option>
+                                            <option>Qtr 4</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-1" id="category-4-goal-2-status-1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control col-2" data-sync="status-2">
+                                            <option></option>
+                                            <option>YTD</option>
+                                        </select>
+                                        <input type="text" class="form-control" disabled data-toggle="status-2" id="category-4-goal-2-status-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="preview-dialog" class="modal" tabindex="-1" role="dialog"  aria-labelledby="preview-modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="preview-modal-title">Preview</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe id="preview-iframe" src="" width="100%" height="800"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <!--<script src="node_modules/jquery/dist/jquery.slim.min.js"></script>-->
+        <!--<script src="node_modules/popper.js/dist/umd/popper.min.js"></script>-->
+        <!--<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>-->
+        <script src="index.js"></script>
+    </body>
+</html>
