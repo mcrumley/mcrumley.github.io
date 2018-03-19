@@ -1,7 +1,3 @@
-const jsPDF = require('jspdf');
-const bootstrap = require('bootstrap');
-const $ = require('jquery');
-
 var btnNewBBox = document.getElementById('btn-new-bbox');
 var btnSaveBBox = document.getElementById('btn-save-bbox');
 var btnPreviewBBox = document.getElementById('btn-preview-bbox');
