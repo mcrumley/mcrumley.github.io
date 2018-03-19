@@ -40,59 +40,6 @@ catch (e) {
 }
 var bbox_files = JSON.parse(stored);
 var blank = { year: year, yard: '', status1: 1, status2: 0, categories: [ { title: '', color: 0, goals: [emptyGoal, emptyGoal, emptyGoal] }, { title: '', color: 1, goals: [emptyGoal, emptyGoal, emptyGoal] }, { title: '', color: 1, goals: [emptyGoal, emptyGoal, emptyGoal] }, { title: '', color: 1, goals: [emptyGoal, emptyGoal, emptyGoal] }, { title: '', color: 1, goals: [emptyGoal, emptyGoal, emptyGoal] } ] };
-bbox_files['2018 Kaley'] = {
-    year: 2018,
-    yard: 'Kaley',
-    status1: 0,
-    status2: 0,
-    categories: [
-        {
-            title: 'Safety',
-            color: 0,
-            goals: [
-                { title: 'Achieve the Nucor Safety and Environmental Awards', status1: '', status2: '' },
-                { title: 'Zero OSHA Recordables', status1: '', status2: '' },
-                { title: '', status1: '', status2: '' }
-            ]
-        },
-        {
-            title: 'Transportation Services',
-            color: 1,
-            goals: [
-                { title: 'Increase average shred transfer weights by 2 GT ($18,000 in trucking savings)', status1: '', status2: '' },
-                { title: 'Reduce average load time for shred trucks to 40 minutes', status1: '', status2: '' },
-                { title: 'No trailer damage', status1: '', status2: '' }
-            ]
-        },
-        {
-            title: 'Commercial Excellence',
-            color: 1,
-            goals: [
-                { title: 'Increase NF Purchasing by 15% (at 2017 margin equals $230,000 increase)', status1: '', status2: '' },
-                { title: 'Increase shred purchasing by 5% ($35,000 increase)', status1: '', status2: '' },
-                { title: '', status1: '', status2: '' }
-            ]
-        },
-        {
-            title: 'Operational Excellence',
-            color: 1,
-            goals: [
-                { title: 'Decrease labor expence per GT produced by $4 (by increasing production and controlling overtime)', status1: '', status2: '' },
-                { title: 'Keep scheduled maintenance on baler to help prevent unexpected downtime', status1: '', status2: '' },
-                { title: '', status1: '', status2: '' }
-            ]
-        },
-        {
-            title: 'Hire, Develop & Retain',
-            color: 1,
-            goals: [
-                { title: 'Hire and retain new Kiosk Operator', status1: '', status2: '' },
-                { title: 'Cross train another baler operator and material handler operator', status1: '', status2: '' },
-                { title: '', status1: '', status2: '' }
-            ]
-        }
-    ]
-};/**/
 
 btnNewBBox.addEventListener('click', function(e) {
     e.preventDefault();
