@@ -431,6 +431,7 @@ function makePDF(report) {
     drawTopLeftBox(doc, 0.5, 1.5, 5 - pt, 3.25 - pt, 1, 'F');
     drawCenterTextUnderline(doc, title, 2.4, 2, 16, color);
     doc.setTextColor(0, 0, 0);
+    doc.setDrawColor(0, 0, 0);
     drawGoals(doc, goals, 1.0, 2.25, 2.9, 2.3, report.status1, report.status2);
 
     // top right
@@ -443,6 +444,7 @@ function makePDF(report) {
     drawTopRightBox(doc, 5.5 + pt, 1.5, 5 - pt, 3.25 - pt, 1, 'F');
     drawCenterTextUnderline(doc, title, 8.6, 2, 16, color);
     doc.setTextColor(0, 0, 0);
+    doc.setDrawColor(0, 0, 0);
     drawGoals(doc, goals, 7.3, 2.25, 2.9, 2.3, report.status1, report.status2);
 
     // bottom left
@@ -455,6 +457,7 @@ function makePDF(report) {
     drawBottomLeftBox(doc, 0.5, 4.75 + pt, 5 - pt, 3.25 - pt, 1, 'F');
     drawCenterTextUnderline(doc, title, 2.4, 5.25, 16, color);
     doc.setTextColor(0, 0, 0);
+    doc.setDrawColor(0, 0, 0);
     drawGoals(doc, goals, 1.0, 5.50, 2.9, 2.3, report.status1, report.status2);
 
     // bottom right
@@ -467,6 +470,7 @@ function makePDF(report) {
     drawBottomRightBox(doc, 5.5 + pt, 4.75 + pt, 5 - pt, 3.25 - pt, 1, 'F');
     drawCenterTextUnderline(doc, title, 8.6, 5.25, 16, color);
     doc.setTextColor(0, 0, 0);
+    doc.setDrawColor(0, 0, 0);
     drawGoals(doc, goals, 7.3, 5.50, 2.9, 2.3, report.status1, report.status2);
 
     // center
@@ -479,6 +483,7 @@ function makePDF(report) {
     doc.roundedRect(4, 3, 3, 3.5, 0.5, 0.5, 'F');
     drawCenterTextUnderline(doc, title, 5.5, 3.5-.125, 16, color);
     doc.setTextColor(0, 0, 0);
+    doc.setDrawColor(0, 0, 0);
     drawGoals(doc, goals, 4.3, 3.75-.125, 2.65, 2.8, report.status1, report.status2);
 
     return doc;
@@ -516,10 +521,18 @@ function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2) {
         if ((stat1 > 0 && goals[i].status1.length > 0) || (stat2 > 0 && goals[i].status2.length > 0)) {
             if (stat1 > 0) {
                 doc.setFontStyle('bold').setFontSize(smallFontSize);
+                var uwidth = (doc.getStringUnitWidth(config.statusOnes[stat1]) * smallFontSize) / 72;
+                doc.setLineWidth(1/72);
+                var uy = y + (smallFontSize * 0.125) / 72;
+                doc.line(x, uy, x + uwidth, uy);
                 doc.text(config.statusOnes[stat1], x, y);
             }
             if (stat2 > 0) {
                 doc.setFontStyle('bold').setFontSize(smallFontSize);
+                var uwidth = (doc.getStringUnitWidth(config.statusTwos[stat1]) * smallFontSize) / 72;
+                doc.setLineWidth(1/72);
+                var uy = y + (smallFontSize * 0.125) / 72;
+                doc.line(x + (maxLineWidth/2), uy, x + (maxLineWidth/2) + uwidth, uy);
                 doc.text(config.statusTwos[stat2], x + (maxLineWidth/2), y);
             }
             y += smallFontSize * lineHeight / ptsPerInch;
