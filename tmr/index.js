@@ -44,7 +44,7 @@ var config = {
     ],
     colors: [
         { description: 'Blue', textColor: '#ffffff', backgroundColor: '#6097d4', pdfColor: [96, 151, 212], pdfTextColor: [255, 255, 255] },
-        { description: 'Yellow', textColor: '#ffffff', backgroundColor: '#e2e25d', pdfColor: [226, 226, 93], pdfTextColor: [0, 0, 0] },
+        { description: 'Yellow', textColor: '#ffffff', backgroundColor: '#e2d25d', pdfColor: [226, 210, 93], pdfTextColor: [0, 0, 0] },
         { description: 'Red', textColor: '#ffffff', backgroundColor: '#e27c7c', pdfColor: [226, 124, 124], pdfTextColor: [255, 255, 255] },
         { description: 'Light Blue', textColor: '#000000', backgroundColor: '#b9d3ed', pdfColor: [185, 211, 237], pdfTextColor: [0, 0, 0] },
         { description: 'Light Yellow', textColor: '#000000', backgroundColor: '#eaeabb', pdfColor: [234, 234, 187], pdfTextColor: [0, 0, 0] },
