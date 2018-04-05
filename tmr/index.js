@@ -8,10 +8,10 @@ var config = {
     goalCount: 3,
     statusOnes: [
         '',
-        'Qtr 1',
-        'Qtr 2',
-        'Qtr 3',
-        'Qtr 4'
+        'Q1',
+        'Q2',
+        'Q3',
+        'Q4'
     ],
     statusTwos: [
         '',
