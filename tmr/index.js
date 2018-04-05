@@ -404,7 +404,11 @@ function showConfirm(message) {
     return promise;
 }
 
-function makePDF(report) {
+function makePDF(report, fontsize) {
+    var shiftY = -.20;
+    var boxHeight = 3.25+.1;
+    fontsize = fontsize || 1.0;
+
     // Landscape, US Letter
     var doc = new jsPDF({
         orientation: 'landscape',
@@ -428,11 +432,14 @@ function makePDF(report) {
     var color = config.colors[box.color].pdfTextColor;
     var goals = box.goals;
     doc.setFillColor(bgColor[0], bgColor[1], bgColor[2]);
-    drawTopLeftBox(doc, 0.5, 1.5, 5 - pt, 3.25 - pt, 1, 'F');
-    drawCenterTextUnderline(doc, title, 2.4, 2, 16, color);
+    drawTopLeftBox(doc, 0.5, 1.5 + shiftY, 5 - pt, boxHeight - pt, 1, 'F');
+    drawCenterTextUnderline(doc, title, 2.4, 2-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    drawGoals(doc, goals, 1.0, 2.25, 2.9, 2.3, report.status1, report.status2);
+    if (!drawGoals(doc, goals, 1.0, 2.25-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize) && fontsize > 0.5) {
+        doc = null;
+        return makePDF(report, fontsize - 0.05);
+    }
 
     // top right
     var box = report.categories[2];
@@ -441,11 +448,14 @@ function makePDF(report) {
     var color = config.colors[box.color].pdfTextColor;
     var goals = box.goals;
     doc.setFillColor(bgColor[0], bgColor[1], bgColor[2]);
-    drawTopRightBox(doc, 5.5 + pt, 1.5, 5 - pt, 3.25 - pt, 1, 'F');
-    drawCenterTextUnderline(doc, title, 8.6, 2, 16, color);
+    drawTopRightBox(doc, 5.5 + pt, 1.5 + shiftY, 5 - pt, boxHeight - pt, 1, 'F');
+    drawCenterTextUnderline(doc, title, 8.6, 2-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    drawGoals(doc, goals, 7.3, 2.25, 2.9, 2.3, report.status1, report.status2);
+    if (!drawGoals(doc, goals, 7.3, 2.25-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize) && fontsize > 0.5) {
+        doc = null;
+        return makePDF(report, fontsize - 0.05);
+    }
 
     // bottom left
     var box = report.categories[3];
@@ -454,11 +464,14 @@ function makePDF(report) {
     var color = config.colors[box.color].pdfTextColor;
     var goals = box.goals;
     doc.setFillColor(bgColor[0], bgColor[1], bgColor[2]);
-    drawBottomLeftBox(doc, 0.5, 4.75 + pt, 5 - pt, 3.25 - pt, 1, 'F');
-    drawCenterTextUnderline(doc, title, 2.4, 5.25, 16, color);
+    drawBottomLeftBox(doc, 0.5, 1.5 + boxHeight + shiftY + pt, 5 - pt, boxHeight - pt, 1, 'F');
+    drawCenterTextUnderline(doc, title, 2.4, 5.25-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    drawGoals(doc, goals, 1.0, 5.50, 2.9, 2.3, report.status1, report.status2);
+    if (!drawGoals(doc, goals, 1.0, 5.50-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize) && fontsize > 0.5) {
+        doc = null;
+        return makePDF(report, fontsize - 0.05);
+    }
 
     // bottom right
     var box = report.categories[4];
@@ -467,11 +480,14 @@ function makePDF(report) {
     var color = config.colors[box.color].pdfTextColor;
     var goals = box.goals;
     doc.setFillColor(bgColor[0], bgColor[1], bgColor[2]);
-    drawBottomRightBox(doc, 5.5 + pt, 4.75 + pt, 5 - pt, 3.25 - pt, 1, 'F');
-    drawCenterTextUnderline(doc, title, 8.6, 5.25, 16, color);
+    drawBottomRightBox(doc, 5.5 + pt, 1.5 + boxHeight + shiftY + pt, 5 - pt, boxHeight - pt, 1, 'F');
+    drawCenterTextUnderline(doc, title, 8.6, 5.25-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    drawGoals(doc, goals, 7.3, 5.50, 2.9, 2.3, report.status1, report.status2);
+    if (!drawGoals(doc, goals, 7.3, 5.50-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize) && fontsize > 0.5) {
+        doc = null;
+        return makePDF(report, fontsize - 0.05);
+    }
 
     // center
     var box = report.categories[0];
@@ -480,21 +496,27 @@ function makePDF(report) {
     var color = config.colors[box.color].pdfTextColor;
     var goals = box.goals;
     doc.setFillColor(bgColor[0], bgColor[1], bgColor[2]);
-    doc.roundedRect(4, 3, 3, 3.5, 0.5, 0.5, 'F');
-    drawCenterTextUnderline(doc, title, 5.5, 3.5-.125, 16, color);
+    doc.roundedRect(4, 3 + shiftY, 3, 3.5+.2, 0.5, 0.5, 'F');
+    drawCenterTextUnderline(doc, title, 5.5, 3.5-.125-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    drawGoals(doc, goals, 4.3, 3.75-.125, 2.65, 2.8, report.status1, report.status2);
+    if (!drawGoals(doc, goals, 4.3, 1.5 + 2.25 -.125-.20 + shiftY, 2.65, 2.8+.40, report.status1, report.status2, fontsize) && fontsize > 0.5) {
+        doc = null;
+        return makePDF(report, fontsize - 0.05);
+    }
 
     return doc;
 }
 
-function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2) {
+function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2, fontMultiplier) {
+    fontMultiplier = fontMultiplier || 1.0;
     var lineHeight = 1.25,
-        fontSize = 10,
-        smallFontSize = 8,
+        fontSize = 12.5 * fontMultiplier,
+        smallFontSize = 10 * fontMultiplier,
         ptsPerInch = 72,
-        oneLineHeight = fontSize * lineHeight / ptsPerInch;
+        oneLineHeight = fontSize * lineHeight / ptsPerInch,
+        maxY = y + maxHeight,
+        lastLine = y;
 
     //doc.setDrawColor(0, 0, 0);
     //doc.setLineWidth(1/144);
@@ -512,9 +534,13 @@ function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2) {
             .setFontStyle('normal')
             .setFontSize(fontSize)
             .splitTextToSize(goals[i].title, maxLineWidth);
+        while (/^\s*$/.test(textLines[textLines.length-1])) {
+            textLines.pop();
+        }
         // doc.text can now add those lines easily; otherwise, it would have run text off the screen!
         doc.text((++n) + '.', x - (1.5 * fontSize / ptsPerInch), y);
         doc.text(textLines, x, y);
+        lastLine = y + textLines.length * fontSize / ptsPerInch;
         var textHeight = textLines.length * oneLineHeight;
         y += textHeight;
 
@@ -526,6 +552,7 @@ function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2) {
                 var uy = y + (smallFontSize * 0.125) / 72;
                 doc.line(x, uy, x + uwidth, uy);
                 doc.text(config.statusOnes[stat1], x, y);
+                lastLine = y + smallFontSize / ptsPerInch;
             }
             if (stat2 > 0) {
                 doc.setFontStyle('bold').setFontSize(smallFontSize);
@@ -534,16 +561,22 @@ function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2) {
                 var uy = y + (smallFontSize * 0.125) / 72;
                 doc.line(x + (maxLineWidth/2), uy, x + (maxLineWidth/2) + uwidth, uy);
                 doc.text(config.statusTwos[stat2], x + (maxLineWidth/2), y);
+                lastLine = y + smallFontSize / ptsPerInch;
             }
             y += smallFontSize * lineHeight / ptsPerInch;
             var statlines;
-            var textHeight = 0
+            var textHeight = 0;
+            var deltaY = 0;
             if (goals[i].status1.length > 0) {
                 statlines = doc
                     .setFontStyle('normal')
                     .setFontSize(smallFontSize)
                     .splitTextToSize(goals[i].status1, (maxLineWidth / 2) - 0.125);
+                while (/^\s*$/.test(statlines[statlines.length-1])) {
+                    statlines.pop();
+                }
                 doc.text(statlines, x, y);
+                deltaY = Math.max(deltaY, statlines.length * smallFontSize * lineHeight / ptsPerInch);
                 textHeight = Math.max(textHeight, (statlines.length + 0.25) * smallFontSize * lineHeight / ptsPerInch);
             }
             if (goals[i].status2.length > 0) {
@@ -551,9 +584,14 @@ function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2) {
                     .setFontStyle('normal')
                     .setFontSize(smallFontSize)
                     .splitTextToSize(goals[i].status1, (maxLineWidth / 2));
+                while (/^\s*$/.test(statlines[statlines.length-1])) {
+                    statlines.pop();
+                }
                 doc.text(statlines, x + (maxLineWidth/2), y);
+                deltaY = Math.max(deltaY, statlines.length * smallFontSize * lineHeight / ptsPerInch);
                 textHeight = Math.max(textHeight, (statlines.length + 0.25) * smallFontSize * lineHeight / ptsPerInch);
             }
+            lastLine = y + deltaY;
             y += textHeight;
         }
         else {
@@ -562,6 +600,8 @@ function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2) {
 
         y += 0.25 * oneLineHeight;
     }
+    lastLine -= smallFontSize / ptsPerInch;
+    return (lastLine <= maxY);
 }
 
 function drawCenterTextUnderline(doc, str, x, y, fontsize, color) {
