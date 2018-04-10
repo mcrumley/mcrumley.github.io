@@ -457,7 +457,7 @@ function makePDF(report, fontsize, spacing) {
     drawCenterTextUnderline(doc, title, 8.6, 2-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    if ((gap = drawGoals(doc, goals, 7.3, 2.25-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize, spacing[1])) < 0 && fontsize > 0.5) {
+    if ((gap = drawGoals(doc, goals, 7.35, 2.25-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize, spacing[1])) < 0 && fontsize > 0.5) {
         doc = null;
         return makePDF(report, fontsize - 0.05, spacing);
     } else if (gap > 1 && spacing[1] == 0) {
@@ -497,7 +497,7 @@ function makePDF(report, fontsize, spacing) {
     drawCenterTextUnderline(doc, title, 8.6, 5.25-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    if ((gap = drawGoals(doc, goals, 7.3, 5.50-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize, spacing[3])) < 0 && fontsize > 0.5) {
+    if ((gap = drawGoals(doc, goals, 7.35, 5.50-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize, spacing[3])) < 0 && fontsize > 0.5) {
         doc = null;
         return makePDF(report, fontsize - 0.05, spacing);
     } else if (gap > 1 && spacing[3] == 0) {
@@ -517,7 +517,7 @@ function makePDF(report, fontsize, spacing) {
     drawCenterTextUnderline(doc, title, 5.5, 3.5-.125-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    if ((gap = drawGoals(doc, goals, 4.3, 1.5 + 2.25 -.125-.20 + shiftY, 2.65, 2.8+.40, report.status1, report.status2, fontsize, spacing[4])) < 0 && fontsize > 0.5) {
+    if ((gap = drawGoals(doc, goals, 4.35, 1.5 + 2.25 -.125-.20 + shiftY, 2.65, 2.8+.40, report.status1, report.status2, fontsize, spacing[4])) < 0 && fontsize > 0.5) {
         doc = null;
         return makePDF(report, fontsize - 0.05, spacing);
     } else if (gap > 1 && spacing[4] == 0) {
