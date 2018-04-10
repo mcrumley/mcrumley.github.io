@@ -532,8 +532,8 @@ function makePDF(report, fontsize, spacing) {
 function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2, fontMultiplier, spacing) {
     fontMultiplier = fontMultiplier || 1.0;
     var lineHeight = 1.25,
-        fontSize = 12.5 * fontMultiplier,
-        smallFontSize = 10 * fontMultiplier,
+        fontSize = 15 * fontMultiplier,
+        smallFontSize = 12 * fontMultiplier,
         ptsPerInch = 72,
         oneLineHeight = fontSize * lineHeight / ptsPerInch,
         maxY = y + maxHeight,
