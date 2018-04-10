@@ -404,10 +404,11 @@ function showConfirm(message) {
     return promise;
 }
 
-function makePDF(report, fontsize) {
+function makePDF(report, fontsize, spacing) {
     var shiftY = -.20;
     var boxHeight = 3.25+.1;
     fontsize = fontsize || 1.0;
+    spacing = spacing || [0, 0, 0, 0, 0];
 
     // Landscape, US Letter
     var doc = new jsPDF({
@@ -436,9 +437,13 @@ function makePDF(report, fontsize) {
     drawCenterTextUnderline(doc, title, 2.4, 2-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    if (!drawGoals(doc, goals, 1.0, 2.25-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize) && fontsize > 0.5) {
+    if ((gap = drawGoals(doc, goals, 1.0, 2.25-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize, spacing[0])) < 0 && fontsize > 0.5) {
         doc = null;
-        return makePDF(report, fontsize - 0.05);
+        return makePDF(report, fontsize - 0.05, spacing);
+    } else if (gap > 1 && spacing[0] == 0) {
+        doc = null;
+        spacing[0] = gap;
+        return makePDF(report, fontsize, spacing);
     }
 
     // top right
@@ -452,9 +457,13 @@ function makePDF(report, fontsize) {
     drawCenterTextUnderline(doc, title, 8.6, 2-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    if (!drawGoals(doc, goals, 7.3, 2.25-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize) && fontsize > 0.5) {
+    if ((gap = drawGoals(doc, goals, 7.3, 2.25-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize, spacing[1])) < 0 && fontsize > 0.5) {
         doc = null;
-        return makePDF(report, fontsize - 0.05);
+        return makePDF(report, fontsize - 0.05, spacing);
+    } else if (gap > 1 && spacing[1] == 0) {
+        doc = null;
+        spacing[1] = gap;
+        return makePDF(report, fontsize, spacing);
     }
 
     // bottom left
@@ -468,9 +477,13 @@ function makePDF(report, fontsize) {
     drawCenterTextUnderline(doc, title, 2.4, 5.25-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    if (!drawGoals(doc, goals, 1.0, 5.50-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize) && fontsize > 0.5) {
+    if ((gap = drawGoals(doc, goals, 1.0, 5.50-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize, spacing[2])) < 0 && fontsize > 0.5) {
         doc = null;
-        return makePDF(report, fontsize - 0.05);
+        return makePDF(report, fontsize - 0.05, spacing);
+    } else if (gap > 1 && spacing[2] == 0) {
+        doc = null;
+        spacing[2] = gap;
+        return makePDF(report, fontsize, spacing);
     }
 
     // bottom right
@@ -484,9 +497,13 @@ function makePDF(report, fontsize) {
     drawCenterTextUnderline(doc, title, 8.6, 5.25-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    if (!drawGoals(doc, goals, 7.3, 5.50-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize) && fontsize > 0.5) {
+    if ((gap = drawGoals(doc, goals, 7.3, 5.50-.20 + shiftY, 2.9, 2.3+.35, report.status1, report.status2, fontsize, spacing[3])) < 0 && fontsize > 0.5) {
         doc = null;
-        return makePDF(report, fontsize - 0.05);
+        return makePDF(report, fontsize - 0.05, spacing);
+    } else if (gap > 1 && spacing[3] == 0) {
+        doc = null;
+        spacing[3] = gap;
+        return makePDF(report, fontsize, spacing);
     }
 
     // center
@@ -500,15 +517,19 @@ function makePDF(report, fontsize) {
     drawCenterTextUnderline(doc, title, 5.5, 3.5-.125-.1 + shiftY, 16, color);
     doc.setTextColor(0, 0, 0);
     doc.setDrawColor(0, 0, 0);
-    if (!drawGoals(doc, goals, 4.3, 1.5 + 2.25 -.125-.20 + shiftY, 2.65, 2.8+.40, report.status1, report.status2, fontsize) && fontsize > 0.5) {
+    if ((gap = drawGoals(doc, goals, 4.3, 1.5 + 2.25 -.125-.20 + shiftY, 2.65, 2.8+.40, report.status1, report.status2, fontsize, spacing[4])) < 0 && fontsize > 0.5) {
         doc = null;
-        return makePDF(report, fontsize - 0.05);
+        return makePDF(report, fontsize - 0.05, spacing);
+    } else if (gap > 1 && spacing[4] == 0) {
+        doc = null;
+        spacing[4] = gap;
+        return makePDF(report, fontsize, spacing);
     }
 
     return doc;
 }
 
-function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2, fontMultiplier) {
+function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2, fontMultiplier, spacing) {
     fontMultiplier = fontMultiplier || 1.0;
     var lineHeight = 1.25,
         fontSize = 12.5 * fontMultiplier,
@@ -522,12 +543,25 @@ function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2, font
     //doc.setLineWidth(1/144);
     //doc.rect(x, y, maxLineWidth, maxHeight, 'S');
 
+    var count = 0;
+    for (var i = 0; i < goals.length; i++) {
+        if (goals[i].title.length > 0) {
+            ++count;
+        }
+    }
+    if (count == 0) {
+        return 0;
+    }
+    spacing = spacing / (count + 1);
+
     var n = 0;
     y += fontSize / ptsPerInch;
     for (var i = 0; i < goals.length; i++) {
         if (goals[i].title.length == 0) {
             continue;
         }
+        y += spacing;
+        lastLine += spacing;
         // splitTextToSize takes your string and turns it in to an array of strings,
         // each of which can be displayed within the specified maxLineWidth.
         var textLines = doc
@@ -601,7 +635,7 @@ function drawGoals(doc, goals, x, y, maxLineWidth, maxHeight, stat1, stat2, font
         y += 0.25 * oneLineHeight;
     }
     lastLine -= smallFontSize / ptsPerInch;
-    return (lastLine <= maxY);
+    return maxY - lastLine;
 }
 
 function drawCenterTextUnderline(doc, str, x, y, fontsize, color) {
